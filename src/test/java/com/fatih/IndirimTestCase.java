@@ -42,6 +42,7 @@ public class IndirimTestCase {
         } else {
             System.out.println("Lütfen önce sipariş kaydı oluşturunuz.");
         }
+
     }
 
     @Test
