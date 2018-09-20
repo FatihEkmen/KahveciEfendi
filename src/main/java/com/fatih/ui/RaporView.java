@@ -77,7 +77,7 @@ public class RaporView extends VerticalLayout implements View {
         LocalDate tarih = tarihFiltre.getValue();
 
         Date date = null;
-        if (tarih != null){
+        if (tarih != null) {
             date = Date.from(tarih.atStartOfDay(ZoneId.systemDefault()).toInstant());
         }
 
@@ -94,7 +94,7 @@ public class RaporView extends VerticalLayout implements View {
             for (IcecekSiparis icecekSiparis : icecekSiparisSet) {
 
                 Icecek icecek = icecekSiparis.getIcecek();
-                String icecekStr =  icecek.getAdi() + " -> ";
+                String icecekStr = icecek.getAdi() + " -> ";
                 Set<Eklenti> eklentiler = icecekSiparis.getEklentiler();
 
                 for (Eklenti eklenti : eklentiler) {

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class Connection {
 
-    public static void initConnection(HttpServletRequest vaadinRequest, Object target){
+    public static void initConnection(HttpServletRequest vaadinRequest, Object target) {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(target);
         ServletContext servletContext = vaadinRequest.getSession().getServletContext();
         ApplicationContext applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);

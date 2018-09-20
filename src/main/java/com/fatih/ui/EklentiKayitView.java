@@ -73,7 +73,7 @@ public class EklentiKayitView extends VerticalLayout implements View {
 
     }
 
-    private void alanlariTemizle(){
+    private void alanlariTemizle() {
         eklentiAdiField.setValue("");
         eklentiFiyatiField.setValue("");
         eklentiTuruField.setValue(null);

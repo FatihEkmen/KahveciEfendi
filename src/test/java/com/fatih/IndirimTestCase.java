@@ -25,9 +25,9 @@ public class IndirimTestCase {
     public void yuzde25Indirim() {
         List<Icecek> icecekList = new IcecekDao().findAll();
         List<Eklenti> eklentiList = new EklentiDao().findAll();
-        BigDecimal iceceklerinToplamFiyati = new BigDecimal(0);
-        BigDecimal eklentilerinToplamFiyati = new BigDecimal(0);
-        BigDecimal toplamFiyat = new BigDecimal(0);
+        BigDecimal iceceklerinToplamFiyati = BigDecimal.ZERO;
+        BigDecimal eklentilerinToplamFiyati = BigDecimal.ZERO;
+        BigDecimal toplamFiyat = BigDecimal.ZERO;
         for (Icecek icecek : icecekList) {
             iceceklerinToplamFiyati = iceceklerinToplamFiyati.add(icecek.getFiyat());
         }
@@ -43,7 +43,7 @@ public class IndirimTestCase {
     public void uctenFazlaIcecekIndirimi() {
         List<Icecek> icecekList = new IcecekDao().findAll();
 
-        BigDecimal iceceklerinToplamFiyati = new BigDecimal(0);
+        BigDecimal iceceklerinToplamFiyati = BigDecimal.ZERO;
         for (Icecek icecek : icecekList) {
             iceceklerinToplamFiyati = iceceklerinToplamFiyati.add(icecek.getFiyat());
             Set<Eklenti> eklentiler = icecek.getEklentiler();
@@ -60,9 +60,9 @@ public class IndirimTestCase {
         List<Icecek> icecekList = new IcecekDao().findAll();
         List<Eklenti> eklentiList = new EklentiDao().findAll();
 
-        BigDecimal iceceklerinToplamFiyati = new BigDecimal(0);
-        BigDecimal eklentilerinToplamFiyati = new BigDecimal(0);
-        BigDecimal toplamFiyat = new BigDecimal(0);
+        BigDecimal iceceklerinToplamFiyati = BigDecimal.ZERO;
+        BigDecimal eklentilerinToplamFiyati = BigDecimal.ZERO;
+        BigDecimal toplamFiyat = BigDecimal.ZERO;
         for (Icecek icecek : icecekList) {
             iceceklerinToplamFiyati = iceceklerinToplamFiyati.add(icecek.getFiyat());
         }

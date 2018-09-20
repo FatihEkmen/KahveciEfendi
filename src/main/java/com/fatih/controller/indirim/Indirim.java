@@ -48,26 +48,6 @@ public class Indirim implements IndirimTurleri {
 
     }
 
-//    public Indirim(Set<IcecekSiparis> icecekSiparisList) {
-//        this.siparisList = icecekSiparisList;
-//        this.sepettekiIcecekler = new HashSet<>();
-//        this.sepettekiEklentiler = new HashSet<>();
-//        toplamTutar = new BigDecimal(0);
-//        for (IcecekSiparis icecekSiparis : icecekSiparisList) {
-//            this.sepettekiIcecekler.add(icecekSiparis.getIcecek());
-//        }
-//
-//        for (Icecek icecek : sepettekiIcecekler) {
-//            toplamTutar = toplamTutar.add(icecek.getFiyat());
-//            this.sepettekiEklentiler.addAll(icecek.getEklentiler());
-//        }
-//        for (Eklenti eklenti : sepettekiEklentiler) {
-//            toplamTutar = toplamTutar.add(eklenti.getFiyat());
-//        }
-//
-//        odenecekTutar = toplamTutar;
-//    }
-
     public Indirim(List<Icecek> sepettekiIcecekler, List<Eklenti> sepettekiEklentiler) {
 //        icecekSiparisList = new HashSet<>();
 //        toplamTutar = new BigDecimal(0);
@@ -100,7 +80,7 @@ public class Indirim implements IndirimTurleri {
 
                 BigDecimal eachIcecekFiyati = getIcecekSiparisFiyati(icecekSiparis);
 
-                if (eachIcecekFiyati.compareTo(enUcuzIcecekFiyati) < 0){
+                if (eachIcecekFiyati.compareTo(enUcuzIcecekFiyati) < 0) {
                     enUcuzIcecekFiyati = eachIcecekFiyati;
                 }
             }

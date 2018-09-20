@@ -24,7 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window
@@ -80,25 +83,25 @@ public class AnaSayfaUI extends UI {
         mainLayout.addComponent(initOdemePanel());
     }
 
-    public Panel initUstPanel(){
+    public Panel initUstPanel() {
 
-        Panel odemePanel = new Panel(initUstLayout());
-        odemePanel.setCaption("Kahveci Efendi");
-        odemePanel.addStyleName(ValoTheme.PANEL_WELL);
+        Panel ustPanel = new Panel(initUstLayout());
+        ustPanel.setCaption("Kahveci Efendi");
+        ustPanel.addStyleName(ValoTheme.PANEL_WELL);
 
-        return odemePanel;
+        return ustPanel;
     }
 
-    public Panel initSepetPanel(){
+    public Panel initSepetPanel() {
 
-        Panel odemePanel = new Panel(initSepetLayout());
-        odemePanel.setCaption("Sepet");
-        odemePanel.addStyleName(ValoTheme.PANEL_WELL);
+        Panel sepetPanel = new Panel(initSepetLayout());
+        sepetPanel.setCaption("Sepet");
+        sepetPanel.addStyleName(ValoTheme.PANEL_WELL);
 
-        return odemePanel;
+        return sepetPanel;
     }
 
-    public Panel initOdemePanel(){
+    public Panel initOdemePanel() {
 
         Panel odemePanel = new Panel(initToplamTutarLayout());
         odemePanel.setCaption("Ödeme Bilgileri");
@@ -166,9 +169,6 @@ public class AnaSayfaUI extends UI {
 
             return eklentilerS;
         });
-//        grid.getColumn("icecekler")
-//        grid.addColumn(Siparis::toString).setCaption("İÇECEK");
-//        grid.addColumn(tutar -> icecekToplamTutari + " TL").setCaption("TUTAR");
         icecekSiparisList = new ArrayList<>();
 
         Button btnOdemeYap = new Button("Ödeme Yap");
@@ -193,9 +193,6 @@ public class AnaSayfaUI extends UI {
         indirimAciklamaField.setValue(indirimAciklama);
         toplamOdenecekTutarField.setValue(odenecekTutar + " TL");
 
-        //        BigDecimal indirimSonrasiOdenenTutar = icecekToplamTutari.subtract(indirim.enYuksekIndirimiUygula());
-
-
         Siparis siparis = new Siparis();
         siparis.getIcecekSiparisler().addAll(icecekSiparisList);
         siparis.setSiparisTarihi(new Date());
@@ -215,7 +212,6 @@ public class AnaSayfaUI extends UI {
     }
 
     private HorizontalLayout initUstLayout() {
-//        HorizontalLayout ustLayout = (HorizontalLayout) LayoutFactory.createLayout(HorizontalLayout.class);
         HorizontalLayout ustLayout = new HorizontalLayout();
 
         ustLayout.addComponent(initIslemPanel());
@@ -225,33 +221,33 @@ public class AnaSayfaUI extends UI {
         return ustLayout;
     }
 
-    public Panel initIslemPanel(){
+    public Panel initIslemPanel() {
 
-        Panel odemePanel = new Panel(initIslemLayout());
-        odemePanel.setCaption("Ödeme Bilgileri");
-        odemePanel.addStyleName(ValoTheme.PANEL_WELL);
+        Panel islemPanel = new Panel(initIslemLayout());
+        islemPanel.setCaption("Ödeme Bilgileri");
+        islemPanel.addStyleName(ValoTheme.PANEL_WELL);
 
-        return odemePanel;
+        return islemPanel;
     }
 
-    public Panel initYeniKayitPanel(){
+    public Panel initYeniKayitPanel() {
 
-        Panel odemePanel = new Panel(initYeniKayitLayout());
-        odemePanel.setCaption("Yeni Kayıt");
-        odemePanel.setSizeFull();
-        odemePanel.addStyleName(ValoTheme.PANEL_WELL);
+        Panel yeniKayitPanel = new Panel(initYeniKayitLayout());
+        yeniKayitPanel.setCaption("Yeni Kayıt");
+        yeniKayitPanel.setSizeFull();
+        yeniKayitPanel.addStyleName(ValoTheme.PANEL_WELL);
 
-        return odemePanel;
+        return yeniKayitPanel;
     }
 
-    public Panel initUrunFiyatPanel(){
+    public Panel initUrunFiyatPanel() {
 
-        Panel odemePanel = new Panel(initUrunFiyatLayout());
-        odemePanel.setCaption("Ürün Fiyat");
-        odemePanel.setSizeFull();
-        odemePanel.addStyleName(ValoTheme.PANEL_WELL);
+        Panel urunFiyatPanel = new Panel(initUrunFiyatLayout());
+        urunFiyatPanel.setCaption("Ürün Fiyat");
+        urunFiyatPanel.setSizeFull();
+        urunFiyatPanel.addStyleName(ValoTheme.PANEL_WELL);
 
-        return odemePanel;
+        return urunFiyatPanel;
     }
 
     private VerticalLayout initYeniKayitLayout() {
@@ -275,7 +271,6 @@ public class AnaSayfaUI extends UI {
     }
 
     private VerticalLayout initUrunFiyatLayout() {
-//        VerticalLayout urunFiyatLayout = (VerticalLayout) LayoutFactory.createLayout(VerticalLayout.class);
         VerticalLayout urunFiyatLayout = new VerticalLayout();
         urunFiyatLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 
@@ -294,7 +289,6 @@ public class AnaSayfaUI extends UI {
     }
 
     private VerticalLayout initIslemLayout() {
-//        VerticalLayout islemLayout = (VerticalLayout) LayoutFactory.createLayout(VerticalLayout.class);
         VerticalLayout islemLayout = new VerticalLayout();
         HorizontalLayout horiLayout1 = new HorizontalLayout();
         HorizontalLayout horiLayout2 = new HorizontalLayout();

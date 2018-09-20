@@ -73,7 +73,7 @@ public class IcecekKayitView extends VerticalLayout implements View {
 
     }
 
-    private void alanlariTemizle(){
+    private void alanlariTemizle() {
         icecekAdiField.setValue("");
         icecekFiyatiField.setValue("");
         icecekTuruField.setValue(null);
