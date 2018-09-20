@@ -23,7 +23,6 @@ public class IndirimTestCase {
 
     @Test
     public void yuzde25Indirim() {
-
         if (icecekSiparisList != null) {
             BigDecimal toplamFiyat = indirim.getToplamTutar();
             BigDecimal indirimTutari = indirim.yuzde25Indirim().setScale(2, 2);
@@ -42,7 +41,6 @@ public class IndirimTestCase {
         } else {
             System.out.println("Lütfen önce sipariş kaydı oluşturunuz.");
         }
-
     }
 
     @Test
@@ -53,7 +51,6 @@ public class IndirimTestCase {
             consoleCiktisi(toplamFiyat, indirimTutari,
                     "Avantajlı Bulunan ve Uygulanan İndirim => " + indirim.getUygulananEnYuksekIndirim());
         }
-
     }
 
     private void consoleCiktisi(BigDecimal iceceklerinToplamFiyati, BigDecimal indirimTutari, String uygulananIndirim) {
