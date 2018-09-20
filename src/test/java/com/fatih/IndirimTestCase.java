@@ -1,16 +1,13 @@
 package com.fatih;
 
 import com.fatih.controller.indirim.Indirim;
-import com.fatih.core.dao.EklentiDao;
-import com.fatih.core.dao.IcecekDao;
-import com.fatih.core.domain.Eklenti;
-import com.fatih.core.domain.Icecek;
+import com.fatih.core.dao.IcecekSiparisDao;
+import com.fatih.core.domain.IcecekSiparis;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 /**
  * IndirimTestCase
@@ -21,60 +18,40 @@ import java.util.Set;
 @Ignore
 public class IndirimTestCase {
 
+    private List<IcecekSiparis> icecekSiparisList = new IcecekSiparisDao().findAll();
+    private Indirim indirim = new Indirim(icecekSiparisList);
+
     @Test
     public void yuzde25Indirim() {
-        List<Icecek> icecekList = new IcecekDao().findAll();
-        List<Eklenti> eklentiList = new EklentiDao().findAll();
-        BigDecimal iceceklerinToplamFiyati = BigDecimal.ZERO;
-        BigDecimal eklentilerinToplamFiyati = BigDecimal.ZERO;
-        BigDecimal toplamFiyat = BigDecimal.ZERO;
-        for (Icecek icecek : icecekList) {
-            iceceklerinToplamFiyati = iceceklerinToplamFiyati.add(icecek.getFiyat());
+
+        if (icecekSiparisList != null) {
+            BigDecimal toplamFiyat = indirim.getToplamTutar();
+            BigDecimal indirimTutari = indirim.yuzde25Indirim().setScale(2, 2);
+            consoleCiktisi(toplamFiyat, indirimTutari, "Sepette %25 İndirim");
+        } else {
+            System.out.println("Lütfen önce sipariş kaydı oluşturunuz.");
         }
-        for (Eklenti eklenti : eklentiList) {
-            eklentilerinToplamFiyati = eklentilerinToplamFiyati.add(eklenti.getFiyat());
-        }
-        toplamFiyat = iceceklerinToplamFiyati.add(eklentilerinToplamFiyati);
-        BigDecimal indirimTutari = new Indirim(icecekList, eklentiList).yuzde25Indirim().setScale(2, 2);
-        consoleCiktisi(toplamFiyat, indirimTutari, "Sepette %25 İndirim");
     }
 
     @Test
     public void uctenFazlaIcecekIndirimi() {
-        List<Icecek> icecekList = new IcecekDao().findAll();
-
-        BigDecimal iceceklerinToplamFiyati = BigDecimal.ZERO;
-        for (Icecek icecek : icecekList) {
-            iceceklerinToplamFiyati = iceceklerinToplamFiyati.add(icecek.getFiyat());
-            Set<Eklenti> eklentiler = icecek.getEklentiler();
-            for (Eklenti eklenti : eklentiler) {
-                iceceklerinToplamFiyati = iceceklerinToplamFiyati.add(eklenti.getFiyat());
-            }
+        if (icecekSiparisList != null) {
+            BigDecimal toplamFiyat = indirim.getToplamTutar();
+            BigDecimal indirimTutari = indirim.uctenFazlaIcecekIndirimi().setScale(2, 2);
+            consoleCiktisi(toplamFiyat, indirimTutari, "3'ten Fazla Ürüne Özel İndirim");
+        } else {
+            System.out.println("Lütfen önce sipariş kaydı oluşturunuz.");
         }
-        BigDecimal indirimTutari = new Indirim(icecekList, null).uctenFazlaIcecekIndirimi().setScale(2, 2);
-        consoleCiktisi(iceceklerinToplamFiyati, indirimTutari, "3'ten Fazla Ürüne Özel İndirim");
     }
 
     @Test
     public void enYuksekIndirimiUygula() {
-        List<Icecek> icecekList = new IcecekDao().findAll();
-        List<Eklenti> eklentiList = new EklentiDao().findAll();
-
-        BigDecimal iceceklerinToplamFiyati = BigDecimal.ZERO;
-        BigDecimal eklentilerinToplamFiyati = BigDecimal.ZERO;
-        BigDecimal toplamFiyat = BigDecimal.ZERO;
-        for (Icecek icecek : icecekList) {
-            iceceklerinToplamFiyati = iceceklerinToplamFiyati.add(icecek.getFiyat());
+        if (icecekSiparisList != null) {
+            BigDecimal toplamFiyat = indirim.getToplamTutar();
+            BigDecimal indirimTutari = indirim.enYuksekIndirimiUygula().setScale(2, 2);
+            consoleCiktisi(toplamFiyat, indirimTutari,
+                    "Avantajlı Bulunan ve Uygulanan İndirim => " + indirim.getUygulananEnYuksekIndirim());
         }
-        for (Eklenti eklenti : eklentiList) {
-            eklentilerinToplamFiyati = eklentilerinToplamFiyati.add(eklenti.getFiyat());
-        }
-        toplamFiyat = iceceklerinToplamFiyati.add(eklentilerinToplamFiyati);
-        Indirim indirim = new Indirim(icecekList, eklentiList);
-        BigDecimal enYuksekIndirimiUygula = indirim.enYuksekIndirimiUygula().setScale(2, 2);
-
-        consoleCiktisi(toplamFiyat, toplamFiyat.subtract(enYuksekIndirimiUygula),
-                "Avantajlı Bulunan ve Uygulanan İndirim => " + indirim.getUygulananEnYuksekIndirim());
 
     }
 
